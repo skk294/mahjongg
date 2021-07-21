@@ -95,7 +95,7 @@ def convert_hc_to_list(hc: str) -> list:
     if not hc:
         raise ValueError
     # 赤宝牌处理
-    hc.replace("0", "5")
+    hc = hc.replace("0", "5")
     hc_list = [0] * 34
     pattern = re.compile(r"\d+[mspz]")
     result = pattern.findall(hc)
