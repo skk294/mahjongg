@@ -193,12 +193,12 @@ def get_guzhang_around(guzhang_list: list):
 
 
 # m+d < 5时 减少向听数的进张
-def get_md_less_than5(hc):
+def get_md_less_than5(hc, new_dazi = 1):
     guzhang_list = []
     for x in range(len(hc)):
         if hc[x] == 1:
             guzhang_list.append(x)
-            if x < 27:
+            if x < 27 and new_dazi:
                 for y in [x - 2, x - 1, x + 1, x + 2]:
                     if y >= 0 and math.floor(y / 9) == math.floor(x / 9):
                         guzhang_list.append(y)
