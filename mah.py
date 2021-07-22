@@ -86,12 +86,31 @@ def calc_shanten_13(hc=None, hc_list=None):
                             elif d[3] > 0:
                                 tenpai.append(i)
                                 tenpai.append(i + 2)
-                # 向听为3以上
-                if xt >= 3:
+                # 向听为2以上
+                if xt >= 2:
                     if mianzi_count + dazi_count < 5:
-                        less_than5 = get_md_less_than5(tthc)
-                        tenpai += less_than5
-                        pass
+                        # 4搭子0雀头, 不需要新的搭子(顺子型)
+                        if mianzi_count + dazi_count == 4 and not if_quetou:
+                            less_than5 = get_md_less_than5(tthc,0)
+                            tenpai += less_than5
+                        else:
+                            less_than5 = get_md_less_than5(tthc)
+                            tenpai += less_than5
+                        #pass
+                    elif mianzi_count + dazi_count >=5:
+                        # 超载时 搭子自身可以化为雀头 孤张也可
+                        if not if_quetou:
+                            for d in dazi:
+                                i = d[0]
+                                if d[1] > 0:
+                                    tenpai.append(i)
+                                elif d[2] > 0:
+                                    tenpai.append(i)
+                                    tenpai.append(i + 1)
+                                elif d[3] > 0:
+                                    tenpai.append(i)
+                                    tenpai.append(i + 2)
+                            tenpai += guzhang_list
                 tenpai = list(set(tenpai))
                 tenpai.sort()
                 xt_list[xt] += tenpai
